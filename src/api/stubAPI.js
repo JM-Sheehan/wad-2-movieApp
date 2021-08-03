@@ -10,6 +10,8 @@ class StubAPI {
     getAll() {
         return this.favoriteMovies;
     }
+
+    
 }
 
 export default new StubAPI();
