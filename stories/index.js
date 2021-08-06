@@ -10,9 +10,11 @@ import MovieHeader from "../src/components/headerMovie";
 import SiteHeader from "../src/components/siteHeader";
 import MovieReview from "../src/components/movieReview";
 import PersonCard from "../src/components/personCard";
+import PeopleList from "../src/components/peopleList";
 import { MemoryRouter } from "react-router";
 import GenresContextProvider from "../src/contexts/genresContext";
 import { action } from "@storybook/addon-actions";
+
 
 const sampleReview = {
   author: "Name",
@@ -151,7 +153,7 @@ storiesOf("Home Page/MovieCard", module)
     );
   });
 
-  storiesOf("Person/PersonCard", module)
+  storiesOf("Person Page/PersonCard", module)
   .addDecorator(story => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
@@ -196,6 +198,22 @@ storiesOf("Home Page/MovieList", module)
         movies={movies}
         action={movie => (
           <button className="btn w-100 btn-primary">Test</button>
+        )}
+      />
+    );
+  });
+
+  storiesOf("Person Page/PeopleList", module)
+  .addDecorator(story => (
+    <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
+  ))
+  .add("default", () => {
+    const people = [samplePerson, samplePerson, samplePerson, samplePerson];
+    return (
+      <PeopleList
+        people={people}
+        action={movie => (
+          <button className="btn w-100 btn-primary">Follow Person</button>
         )}
       />
     );
