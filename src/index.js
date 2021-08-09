@@ -10,7 +10,10 @@ import SiteHeader from './components/siteHeader'
 import UpcomingMoviePage from "./pages/upcomingMoviesPage";
 import MoviesContextProvider from "./contexts/moviesContext";
 import GenresContextProvider from "./contexts/genresContext";
-import AddMovieReviewPage from './pages/addMovieReviewPage'
+import PeopleContextProvider from "./contexts/peopleContext";
+import AddMovieReviewPage from './pages/addMovieReviewPage';
+import PeoplePage from "./pages/popularPeoplePage";
+import PersonPage from "./pages/personDetailsPage";
 
 const App = () => {
   return (
@@ -20,15 +23,20 @@ const App = () => {
         <div className="container-fluid">
           <MoviesContextProvider>     {/* NEW  */}
             <GenresContextProvider>
-              <Switch>
-                <Route exact path="/reviews/form" component={AddMovieReviewPage} />
-                <Route path="/movies/upcoming" component={UpcomingMoviePage} />
-                <Route path="/reviews/:id" component={MovieReviewPage} />
-                <Route exact path="/movies/favorites" component={FavoriteMoviesPage} />
-                <Route path="/movies/:id" component={MoviePage} />
-                <Route path="/" component={HomePage} />
-                <Redirect from="*" to="/" />
-              </Switch>
+              <PeopleContextProvider>
+                <Switch>
+                  <Route exact path="/reviews/form" component={AddMovieReviewPage} />
+                  <Route path="/movies/upcoming" component={UpcomingMoviePage} />
+                  <Route path="/people/popular" component={PeoplePage} />
+                  <Route path="/reviews/:id" component={MovieReviewPage} />
+                  <Route exact path="/movies/favorites" component={FavoriteMoviesPage} />
+                  <Route path="/people/:id" component={PersonPage} />
+                  <Route path="/movies/:id" component={MoviePage} />
+                  <Route path="/" component={HomePage} />
+
+                  <Redirect from="*" to="/" />
+                </Switch>
+              </PeopleContextProvider>
             </GenresContextProvider>
           </MoviesContextProvider>     {/* NEW */}
         </div>

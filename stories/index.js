@@ -14,6 +14,8 @@ import PeopleList from "../src/components/peopleList";
 import { MemoryRouter } from "react-router";
 import GenresContextProvider from "../src/contexts/genresContext";
 import { action } from "@storybook/addon-actions";
+import PersonDetails from "../src/components/personDetails";
+import PersonBio from "../src/components/personBio";
 
 
 const sampleReview = {
@@ -153,14 +155,14 @@ storiesOf("Home Page/MovieCard", module)
     );
   });
 
-  storiesOf("Person Page/PersonCard", module)
+  storiesOf("Home Page/PersonCard", module)
   .addDecorator(story => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
   .add("default", () => (
     <PersonCard
       person={samplePerson}
-      action={person => <button className="btn w-100 btn-light">Follow Person</button>}
+      action={person => <button className="btn w-100 btn-primary">Follow Person</button>}
     />
   ))
   .add("exception", () => {
@@ -169,7 +171,7 @@ storiesOf("Home Page/MovieCard", module)
       <PersonCard
         person={sampleNoProfile}
         action={person => (
-          <button className="btn w-100 btn-light">Follow Person</button>
+          <button className="btn w-100 btn-primary">Follow Person</button>
         )}
       />
     );
@@ -203,7 +205,7 @@ storiesOf("Home Page/MovieList", module)
     );
   });
 
-  storiesOf("Person Page/PeopleList", module)
+  storiesOf("Home Page/PeopleList", module)
   .addDecorator(story => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
@@ -221,6 +223,26 @@ storiesOf("Home Page/MovieList", module)
 
 storiesOf("Movie Details Page/MovieDetails", module).add("default", () => (
   <MovieDetails movie={sample} />
+));
+
+
+
+storiesOf("Person Details Page/PersonDetails", module).add("default", () => (
+  <PersonDetails person={samplePerson} />
+));
+
+storiesOf("Person Details Page/PersonDetails", module)
+.addDecorator(story => (
+  <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
+))
+.add("default", () => (
+  <PersonDetails person={samplePerson} action={movie => (
+    <button className="btn w-100 btn-primary">Follow Person</button>
+  )}/>
+));
+
+storiesOf("Person Details Page/PersonBio", module).add("default", () => (
+  <PersonBio person = {samplePerson}/>
 ));
 
 storiesOf("Movie Details Page/MovieHeader", module)

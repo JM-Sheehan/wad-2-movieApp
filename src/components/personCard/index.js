@@ -4,12 +4,12 @@ import "./personCard.css";
 import "../../globals/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const PersonCard = ({ person, action }) => {
+const PersonCard = ({ person, action, formatting}) => {
 
     return (
-        <div className="col-sm-3">
+        <div className={formatting}>
             <div className="card bg-dark text-white">
-                <Link to={`/person/${person.id}`}>
+                <Link to={`/people/${person.id}`}>
                     <img
                         className="card-img-tag center "
                         alt={person.name}

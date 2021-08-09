@@ -38,6 +38,8 @@ const MoviePage = props => {
           path={`/movies/:id/reviews`}
           render={props => <MovieReviews movie={movie} {...props} />}
         />
+        <div>
+        </div>
       </>
     ) : (
       <p>Waiting for movie details</p>
