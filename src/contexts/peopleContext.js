@@ -1,5 +1,5 @@
 import React, { useEffect, createContext, useReducer } from "react";
-import { getPopularPeople} from "../api/tmdb-api";
+import { getPopularPeople } from "../api/tmdb-api";
 
 export const PeopleContext = createContext(null);
 
@@ -11,19 +11,30 @@ const reducer = (state, action) => {
           p.id === action.payload.people.id ? { ...p, follow: true } : p
         )
       };
+    case "unfollow":
+      return {
+        people: state.people.map((p) =>
+          p.id === action.payload.people.id ? { ...p, follow: false } : p
+        )
+      };
     case "load":
-      return { people: action.payload.people};
+      return { people: action.payload.people };
     default:
       return state;
   }
 };
 
 const PeopleContextProvider = (props) => {
-  const [state, dispatch] = useReducer(reducer, { people: []});
+  const [state, dispatch] = useReducer(reducer, { people: [] });
 
   const addToFollows = (personId) => {
     const index = state.people.map((p) => p.id).indexOf(personId);
     dispatch({ type: "add-follow", payload: { people: state.people[index] } });
+  };
+
+  const unfollow = (personId) => {
+    const index = state.people.map((p) => p.id).indexOf(personId);
+    dispatch({ type: "unfollow", payload: { people: state.people[index] } });
   };
 
 
@@ -40,6 +51,7 @@ const PeopleContextProvider = (props) => {
       value={{
         people: state.people,
         addToFollows: addToFollows,
+        unfollow: unfollow
       }}
     >
       {props.children}

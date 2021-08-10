@@ -14,6 +14,8 @@ import PeopleContextProvider from "./contexts/peopleContext";
 import AddMovieReviewPage from './pages/addMovieReviewPage';
 import PeoplePage from "./pages/popularPeoplePage";
 import PersonPage from "./pages/personDetailsPage";
+import WatchListPage from "./pages/watchListPage";
+import FollowPage from "./pages/following";
 
 const App = () => {
   return (
@@ -27,13 +29,14 @@ const App = () => {
                 <Switch>
                   <Route exact path="/reviews/form" component={AddMovieReviewPage} />
                   <Route path="/movies/upcoming" component={UpcomingMoviePage} />
+                  <Route path="/movies/watch_list" component={WatchListPage} />
                   <Route path="/people/popular" component={PeoplePage} />
+                  <Route path="/people/following" component={FollowPage} />
                   <Route path="/reviews/:id" component={MovieReviewPage} />
                   <Route exact path="/movies/favorites" component={FavoriteMoviesPage} />
                   <Route path="/people/:id" component={PersonPage} />
                   <Route path="/movies/:id" component={MoviePage} />
                   <Route path="/" component={HomePage} />
-
                   <Redirect from="*" to="/" />
                 </Switch>
               </PeopleContextProvider>
